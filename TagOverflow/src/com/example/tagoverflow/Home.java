@@ -1,8 +1,10 @@
 package com.example.tagoverflow;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 
@@ -18,8 +20,10 @@ public class Home extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
+    	MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home, menu);
+        return super.onCreateOptionsMenu(menu);
+        
     }
 
     @Override
@@ -30,6 +34,11 @@ public class Home extends ActionBarActivity {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
+        }
+        else if (id == R.id.add_new) {
+        	Intent intent = new Intent(Home.this, NewPost.class);
+            intent.putExtra("id", "2313"); // Sending random id for now
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
