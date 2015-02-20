@@ -1,7 +1,0 @@
-package com.example.tagoverflow;
-
-import android.support.v7.app.ActionBarActivity;
-
-public class NewPost extends ActionBarActivity {
-
-}

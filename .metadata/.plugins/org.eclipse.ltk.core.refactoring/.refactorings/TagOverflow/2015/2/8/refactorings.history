@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;TagOverflow/res/layout/activity_auth&apos; to &apos;activity_auth.xml&apos;" description="Rename resource &apos;activity_auth&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="res/layout/activity_auth" name="activity_auth.xml" stamp="1424181743313" updateReferences="true"/>
-</session>
