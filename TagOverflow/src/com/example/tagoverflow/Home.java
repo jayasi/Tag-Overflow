@@ -3,9 +3,11 @@ package com.example.tagoverflow;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 
 public class Home extends ActionBarActivity {
@@ -14,8 +16,28 @@ public class Home extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        //updateQuestions("");
+       Controller.getQuestions(new Callback() {
+            @Override
+            public void onRequestComplete(Object output, int x) {
+            	updateQuestions((String)output);
+            }
+        });  
+        this.setTitle("Home");
     }
 
+    public void updateQuestions(String output)
+    {			            
+       Log.d("callback", "updatelist");
+    	ListView questionsList = (ListView) findViewById(R.id.listView1);
+        QuestionsListAdapter adapter = null;
+        try {
+            adapter = new QuestionsListAdapter(this, output, getResources());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        questionsList.setAdapter(adapter);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

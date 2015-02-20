@@ -30,6 +30,6 @@ public class AsyncHTTP extends AsyncTask<URLContext, Integer, String> {
     }
 
     protected void onPostExecute(String output) {
-       callback.onRequestComplete(output);
+       callback.onRequestComplete(output, 1);
     }
 }

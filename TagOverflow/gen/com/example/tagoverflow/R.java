@@ -1649,20 +1649,21 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f09002e;
         public static final int action_mode_bar_stub=0x7f09002d;
         public static final int action_mode_close_button=0x7f090020;
-        public static final int action_settings=0x7f090046;
+        public static final int action_settings=0x7f09004a;
         public static final int activity_chooser_view_content=0x7f090021;
-        public static final int add_new=0x7f090045;
+        public static final int add_new=0x7f090049;
         public static final int always=0x7f090014;
         public static final int beginning=0x7f09001b;
-        public static final int body=0x7f090043;
+        public static final int body=0x7f090044;
         public static final int button1=0x7f09003f;
-        public static final int button2=0x7f090044;
+        public static final int button2=0x7f090045;
         public static final int checkbox=0x7f090029;
         public static final int collapseActionView=0x7f090015;
         public static final int decor_content_parent=0x7f09002f;
         public static final int default_activity_button=0x7f090024;
         public static final int dialog=0x7f090019;
         public static final int disableHome=0x7f09000d;
+        public static final int dp=0x7f090046;
         public static final int dropdown=0x7f09001a;
         public static final int edit_query=0x7f090033;
         public static final int email=0x7f090041;
@@ -1675,6 +1676,7 @@ containing a value of this type.
         public static final int ifRoom=0x7f090016;
         public static final int image=0x7f090023;
         public static final int listMode=0x7f09000a;
+        public static final int listView1=0x7f090043;
         public static final int list_item=0x7f090025;
         public static final int middle=0x7f09001d;
         public static final int never=0x7f090017;
@@ -1683,6 +1685,7 @@ containing a value of this type.
         public static final int passsword=0x7f090042;
         public static final int progress_circular=0x7f090007;
         public static final int progress_horizontal=0x7f090008;
+        public static final int question=0x7f090047;
         public static final int radio=0x7f09002b;
         public static final int search_badge=0x7f090035;
         public static final int search_bar=0x7f090034;
@@ -1701,6 +1704,7 @@ containing a value of this type.
         public static final int split_action_bar=0x7f090004;
         public static final int submit_area=0x7f09003c;
         public static final int tabMode=0x7f09000c;
+        public static final int tags=0x7f090048;
         public static final int textView1=0x7f090040;
         public static final int title=0x7f090027;
         public static final int up=0x7f090001;
@@ -1760,7 +1764,8 @@ containing a value of this type.
         public static final int activity_auth=0x7f030017;
         public static final int activity_home=0x7f030018;
         public static final int new_post=0x7f030019;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001a;
+        public static final int questions=0x7f03001a;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001b;
     }
     public static final class menu {
         public static final int home=0x7f0c0000;
