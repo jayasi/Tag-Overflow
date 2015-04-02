@@ -25,31 +25,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="77dp"
-        android:text="Sign in with your Stack Exchange account" />
-
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:hint="Email Address"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="textEmailAddress" >
-        <requestFocus />
-    </EditText>
-
-    <EditText
-        android:id="@+id/passsword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/email"
-        android:hint="Password"
-        android:layout_below="@+id/email"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="textPassword" />
-
+        android:text="Tag Overflow"
+        android:textSize="@dimen/abc_text_size_headline_material" />
 
 </RelativeLayout>

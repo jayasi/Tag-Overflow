@@ -1,6 +1,7 @@
 package com.example.tagoverflow;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class AsyncHTTP extends AsyncTask<URLContext, Integer, String> {
     }
 
     protected void onPostExecute(String output) {
+    	Log.d("output", output) ;
        callback.onRequestComplete(output, 1);
     }
 }

@@ -1,5 +1,8 @@
 package com.example.tagoverflow;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,27 +11,41 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 public class Home extends ActionBarActivity {
-
+	TextView displayName ; 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        //updateQuestions("");
-       Controller.getQuestions(new Callback() {
+        displayName = (TextView)findViewById(R.id.username) ;
+        Controller.getUserInfo(new Callback() {
+        	@Override
+        	public void onRequestComplete(Object output, int x) { 
+        		try {
+        			JSONObject obj = new JSONObject((String)output) ;
+        			displayName.setText("Hi, " + obj.getJSONArray("items").getJSONObject(0).getString("display_name") );
+					//Log.d("displayname", obj.getJSONArray("items").getJSONObject(0).getString("display_name"));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        		Log.d("user data", (String)output) ;
+        	}
+        }, getIntent().getExtras().getString("accessToken")); 
+        Controller.getQuestions(new Callback() {
             @Override
             public void onRequestComplete(Object output, int x) {
             	updateQuestions((String)output);
             }
-        });  
+        });   
         this.setTitle("Home");
     }
 
     public void updateQuestions(String output)
     {			            
-       Log.d("callback", "updatelist");
     	ListView questionsList = (ListView) findViewById(R.id.listView1);
         QuestionsListAdapter adapter = null;
         try {
@@ -41,7 +58,6 @@ public class Home extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
     	MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.home, menu);
         return super.onCreateOptionsMenu(menu);
@@ -50,16 +66,13 @@ public class Home extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
         }
         else if (id == R.id.add_new) {
         	Intent intent = new Intent(Home.this, NewPost.class);
-            intent.putExtra("id", "2313"); // Sending random id for now
+            intent.putExtra("id", "2313"); // Sending random (user)id for now
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

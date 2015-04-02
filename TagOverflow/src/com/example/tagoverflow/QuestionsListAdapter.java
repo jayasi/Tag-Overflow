@@ -9,7 +9,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +22,7 @@ public class QuestionsListAdapter extends BaseAdapter {
 	LayoutInflater inflater ; 
 	
 	public QuestionsListAdapter(Activity myActivity, String jsonOutput, Resources resources) throws JSONException {
-		Log.d("adapter", "construct");
-		questions = new JSONArray("[{'id':2},{'id':3},{'id':3},{'id':3},{'id':3}]"); //Random stuff for now. Will comment this and uncomment the following
-		//questions = new JSONArray(jsonOutput);
+		questions = new JSONArray(jsonOutput);
         inflater = (LayoutInflater) myActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 	
@@ -59,7 +56,6 @@ public class QuestionsListAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View view, ViewGroup parent) {
 		 final QuestionHolder holder;
-		 Log.d("adapter", "getview");
 	        if(view == null) {
 	            view = inflater.inflate(R.layout.questions, null);
 	            holder = new QuestionHolder();
@@ -73,11 +69,12 @@ public class QuestionsListAdapter extends BaseAdapter {
 	        }
 	        try {
 	        	JSONObject obj = (JSONObject)questions.get(position) ;
-	        	//Will uncomment this and comment the further two lines after we get proper JSON.
-	        	//	holder.tags.setText(obj.getJSONObject("owner").getString("display_name"));
-			    //	holder.question.setText(obj.getString("title"));
-	        	holder.tags.setText("C++   Java   Programming-Languages   Integration   Sample-tags");
-	        	holder.question.setText("This is a sample question which was asked.");
+	        	holder.tags.setText("");
+	        	for(int i = 0 ; i < obj.getJSONArray("tags").length() ; i++)
+	        	{
+	        		holder.tags.append(obj.getJSONArray("tags").getString(i) + "    ") ;
+	        	}
+	        	holder.question.setText(obj.getString("title"));
 	        	//The avatar URL is hardcoded for now. 
 	        	Controller.getUserDP(new Callback() {
 					@Override

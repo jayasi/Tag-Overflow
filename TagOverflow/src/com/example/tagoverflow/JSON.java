@@ -15,6 +15,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
+import java.net.URL;
+import java.net.URLConnection;
+
 
 public class JSON {
 
@@ -23,11 +27,16 @@ public class JSON {
         String type = URL.getType();
         String url = URL.getURL();
         HttpResponse response = null;
-        InputStream responseStream;
+        InputStream responseStream = null;
+        
+        // Need to use this way to support HTTPS connections. Have just used this in the GET part for now
+        URL theUrl = new URL(url);
+        URLConnection urlConnection = theUrl.openConnection();
 
         if(type.equals("GET")) {
-            response = httpclient.execute(new HttpGet(url));
+            responseStream = urlConnection.getInputStream() ; 
         } else if(type.equals("POST")) {
+     
             HttpPost httppost = new HttpPost(url);
             httppost.setEntity(new UrlEncodedFormEntity(URL.getData()));
             response = httpclient.execute(httppost);
@@ -39,10 +48,8 @@ public class JSON {
             HttpDelete httpdelete = new HttpDelete(url);
             response = httpclient.execute(httpdelete);
         }
-        responseStream = response.getEntity().getContent();
+        //responseStream = response.getEntity().getContent();
         if(responseStream != null) {
-            Log.d("Request", type + " : " + url + " " + response.toString());
-            Log.d("Request", type + " : " + url + " " + response.toString());
             BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(responseStream));
             StringBuilder output = new StringBuilder();
             String line;
