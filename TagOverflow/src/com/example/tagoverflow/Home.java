@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -16,10 +17,12 @@ import android.widget.TextView;
 
 public class Home extends ActionBarActivity {
 	TextView displayName ; 
+	SharedPreferences pref ; 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        pref = getSharedPreferences("AppPref", MODE_PRIVATE); 
         displayName = (TextView)findViewById(R.id.username) ;
         Controller.getUserInfo(new Callback() {
         	@Override
@@ -34,7 +37,7 @@ public class Home extends ActionBarActivity {
 				}
         		Log.d("user data", (String)output) ;
         	}
-        }, getIntent().getExtras().getString("accessToken")); 
+        }, pref.getString("AccessToken", "doesNotExist") ); 
         Controller.getQuestions(new Callback() {
             @Override
             public void onRequestComplete(Object output, int x) {

@@ -29,6 +29,7 @@ public class Auth extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
+        pref = getSharedPreferences("AppPref", MODE_PRIVATE); 
     }
 	
 	public void authenticate(View view) {
@@ -59,13 +60,12 @@ public class Auth extends Activity {
                     resultIntent.putExtra("code", authCode);
                     Auth.this.setResult(Activity.RESULT_OK, resultIntent);
                     setResult(Activity.RESULT_CANCELED, resultIntent);
-                    //SharedPreferences.Editor edit = pref.edit();
-                    //edit.putString("Code", authCode);
-                    //edit.commit();
+                    SharedPreferences.Editor edit = pref.edit();
+                    edit.putString("AccessToken", authCode); //Storing the accessToken in the shared preferences for easy access
+                    edit.commit();
                     auth_dialog.dismiss();
                     Toast.makeText(getApplicationContext(),"Authorization Code is: " +authCode, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Auth.this, Home.class);
-                    intent.putExtra("accessToken", authCode); // Sending random id for now
                     startActivity(intent);
                 }else if(url.contains("error=access_denied")){
                     Log.i("", "ACCESS_DENIED_HERE");
