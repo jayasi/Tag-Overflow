@@ -7,14 +7,20 @@ import org.json.JSONObject;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class SinglePost  extends ActionBarActivity{
@@ -24,6 +30,7 @@ public class SinglePost  extends ActionBarActivity{
 	Intent intent  ;
 	ImageView userDP ;
 	SharedPreferences pref ; 
+	ProgressBar progress ; 
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,7 @@ public class SinglePost  extends ActionBarActivity{
         pref = getSharedPreferences("AppPref", MODE_PRIVATE); 
         userDP = (ImageView)findViewById(R.id.userdp) ;
         intent = getIntent();
+        progress = (ProgressBar)findViewById(R.id.progressbar) ;
         Controller.getDiscussionDetails(new Callback() {
             @Override
             public void onRequestComplete(Object output, int x) {
@@ -49,10 +57,52 @@ public class SinglePost  extends ActionBarActivity{
 	
 	void updateDiscussions(Object output) throws JSONException {
 		JSONObject obj = new JSONObject((String)output) ;
-		discussionTitle.setText(obj.getString("title") ); 
-		discussionBody.setText(Html.fromHtml(obj.getString("body")));
-		JSONArray arr = obj.getJSONArray("replies") ;
 		
+		JSONArray tags = obj.getJSONArray("tags") ;
+		discussionTitle.setText(Html.fromHtml(obj.getString("title")));
+		
+		LinearLayout linear = new LinearLayout(this.getApplicationContext()) ;
+		LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT) ;
+		
+		for(int i = 0 ; i < tags.length() ; i++)
+		{
+			TextView text = new TextView(this.getApplicationContext()) ;
+			//Used a hack right now to show the tags separately. Will figure out a way to make these separate later.
+			text.setText("   " + tags.getString(i)) ; 
+			text.setTextColor(Color.BLACK);
+			text.setOnClickListener(new OnClickListener(){
+				@Override
+				public void onClick(View v) {
+					// This can be used to show the stats or whatsoever is requried when a tag is clicked! 
+					
+				}
+				
+			});
+			linear.addView(text);
+			
+		}
+		
+		
+		RelativeLayout relative = (RelativeLayout)findViewById(R.id.titleView) ;
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+		params.addRule(RelativeLayout.BELOW, R.id.discussiontitle);
+		params.addRule(RelativeLayout.RIGHT_OF, R.id.userdp);
+		params.leftMargin = 110 ; 
+		relative.addView(linear, params);
+		discussionBody.setText(Html.fromHtml(obj.getString("body")));
+		discussionBody.setTextColor(Color.BLACK);
+		JSONArray arr  ;
+		
+		if(null!=obj.getJSONArray("replies"))
+		{
+			arr = obj.getJSONArray("replies") ;
+		}
+		else
+		{
+			arr = new JSONArray() ;
+		}
+		progress.setVisibility(View.GONE);
 		Controller.getUserDP(new Callback() {
 			@Override
 			public void onRequestComplete(Object output, int i) {

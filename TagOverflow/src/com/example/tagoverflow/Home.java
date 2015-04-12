@@ -11,13 +11,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
 public class Home extends ActionBarActivity {
 	TextView displayName ; 
-	SharedPreferences pref ; 
+	SharedPreferences pref ;
+	ProgressBar bar ;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,13 +33,13 @@ public class Home extends ActionBarActivity {
         edit.putString("AccessToken", "3fzYofjVJLIM*ETdKljPXw))"); //Storing the accessToken in the shared preferences for easy access
         edit.commit();
         
-        displayName = (TextView)findViewById(R.id.username) ;
+        //displayName = (TextView)findViewById(R.id.username) ;
         Controller.getUserInfo(new Callback() {
         	@Override
         	public void onRequestComplete(Object output, int x) { 
         		try {
         			JSONObject obj = new JSONObject((String)output) ;
-        			displayName.setText("Hi, " + obj.getJSONArray("items").getJSONObject(0).getString("display_name") );
+        			//displayName.setText("Hi, " + obj.getJSONArray("items").getJSONObject(0).getString("display_name") );
 					//Log.d("displayname", obj.getJSONArray("items").getJSONObject(0).getString("display_name"));
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -63,6 +67,8 @@ public class Home extends ActionBarActivity {
             e.printStackTrace();
         }
         questionsList.setAdapter(adapter);
+        bar = (ProgressBar)findViewById(R.id.progress) ; 
+        bar.setVisibility(View.GONE);
     }
 
     @Override

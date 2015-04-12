@@ -4,6 +4,14 @@
         android:orientation="vertical">
 
       
+    <ProgressBar
+		        style="@android:style/Widget.ProgressBar.Small"
+		        android:id="@+id/progressbar"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerHorizontal="true"
+		        android:layout_centerVertical="true" />
+    
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,8 +24,7 @@
               android:layout_height="50dp"
               android:layout_marginTop="7dp"
               android:layout_marginStart="5dp"
-              android:layout_marginLeft="5dp"
-              android:src="@drawable/ic_launcher" />
+              android:layout_marginLeft="5dp" />
         
 	    <TextView
 	        android:id="@+id/discussiontitle"
@@ -30,8 +37,8 @@
               android:layout_marginLeft="5dp"
               android:layout_centerHorizontal="true"
               android:layout_alignParentTop="true"
-              android:text="Question"
-              android:textSize="20sp" />
+              android:textSize="20sp"
+              android:fontFamily="sans-serif-light" />
 	    
 	 </RelativeLayout>
     
@@ -77,11 +84,14 @@
 	            android:layout_height="wrap_content"
 	            android:layout_marginStart="7dp"
 	            android:layout_below="@+id/titleView"
-		        android:layout_marginLeft="7dp" >
+		        android:layout_marginLeft="7dp"
+		        android:fontFamily="sans-serif-light" >
 	        </ListView>
 	        
            
-        
+        <LinearLayout
+		    android:focusable="true" android:focusableInTouchMode="true"
+		    android:layout_width="0px" android:layout_height="0px"/>
 
          <RelativeLayout
             android:id="@+id/InnerRelativeLayout"
@@ -89,6 +99,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="#ffffff">
+	    
+             
 
             <Button
                 android:text="Reply"
@@ -102,7 +114,8 @@
                 android:id="@+id/replyField"
                 android:layout_width="fill_parent"
                 android:layout_toLeftOf="@id/btnReply"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:nextFocusUp="@id/replyField" android:nextFocusLeft="@id/replyField"/>
 
         </RelativeLayout>
          

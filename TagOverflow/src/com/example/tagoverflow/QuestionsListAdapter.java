@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.text.Html;
 import android.util.Log;
 import android.view.*;
 import android.view.View.OnClickListener;
@@ -78,7 +79,7 @@ public class QuestionsListAdapter extends BaseAdapter {
 	        	{
 	        		holder.tags.append(obj.getJSONArray("tags").getString(i) + "    ") ;
 	        	}
-	        	holder.question.setText(obj.getString("title"));
+	        	holder.question.setText(Html.fromHtml(obj.getString("title")));
 	        	// !!! Something is wrong here. All images load for the first discussion avatar. 
 	        	// To be fixed later. 
 	        	Controller.getUserDP(new Callback() {
