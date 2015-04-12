@@ -79,7 +79,8 @@ public class QuestionsListAdapter extends BaseAdapter {
 	        		holder.tags.append(obj.getJSONArray("tags").getString(i) + "    ") ;
 	        	}
 	        	holder.question.setText(obj.getString("title"));
-	        	//The avatar URL is hardcoded for now. 
+	        	// !!! Something is wrong here. All images load for the first discussion avatar. 
+	        	// To be fixed later. 
 	        	Controller.getUserDP(new Callback() {
 					@Override
 					public void onRequestComplete(Object output, int i) {

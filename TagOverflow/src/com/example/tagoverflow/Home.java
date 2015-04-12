@@ -23,6 +23,12 @@ public class Home extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         pref = getSharedPreferences("AppPref", MODE_PRIVATE); 
+        
+        
+        SharedPreferences.Editor edit = pref.edit();
+        edit.putString("AccessToken", "3fzYofjVJLIM*ETdKljPXw))"); //Storing the accessToken in the shared preferences for easy access
+        edit.commit();
+        
         displayName = (TextView)findViewById(R.id.username) ;
         Controller.getUserInfo(new Callback() {
         	@Override

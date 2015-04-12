@@ -36,29 +36,29 @@
     </EditText>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/predictButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1"
         android:layout_below="@+id/body"
         android:layout_marginTop="16dp"
-        android:text="Predict Tags" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="18dp"
-        android:text="Ask Question" />
+        android:text="Predict Tags" 
+        android:onClick="predict"/>
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/title"
         android:text="Ask a question"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/predictButton"
+        android:layout_toEndOf= "@+id/predictButton" 
+        android:onClick="createDiscussion"
+        android:text="Ask Question" />
 
 </RelativeLayout>

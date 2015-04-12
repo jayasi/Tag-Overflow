@@ -18,6 +18,10 @@
         <activity
             android:name=".Home"
             android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".NewPost"
@@ -33,13 +37,15 @@
             android:name="android.support.Home"
             android:value=".Home" />
         </activity>
+        <!-- Have bypassed the sign in for now since the OAuth was creating some issues. 
+        	Will uncomment this later. 
         <activity
             android:name=".Auth">
              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity>  -->
     </application>
 
 </manifest>

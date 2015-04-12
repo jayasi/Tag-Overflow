@@ -95,7 +95,8 @@
                 android:id="@+id/btnReply"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:onClick="submitReply"/>
 
             <EditText
                 android:id="@+id/replyField"
@@ -104,6 +105,7 @@
                 android:layout_height="wrap_content"/>
 
         </RelativeLayout>
+         
          
 
         

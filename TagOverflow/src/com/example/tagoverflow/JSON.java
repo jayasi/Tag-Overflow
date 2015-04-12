@@ -6,16 +6,16 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringWriter;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -36,10 +36,29 @@ public class JSON {
         if(type.equals("GET")) {
             responseStream = urlConnection.getInputStream() ; 
         } else if(type.equals("POST")) {
-     
             HttpPost httppost = new HttpPost(url);
-            httppost.setEntity(new UrlEncodedFormEntity(URL.getData()));
+            if (null!=URL.getJSON())
+            {
+            	StringEntity params =new StringEntity(URL.getJSON().toString());
+            	httppost.setEntity(params);
+            	httppost.setHeader(HTTP.CONTENT_TYPE, "application/json");
+            }
+            else
+            {
+            	 httppost.setEntity(new UrlEncodedFormEntity(URL.getData()));
+            }
             response = httpclient.execute(httppost);
+            /* The following code is to see what parameters have been sent. 
+             * InputStream in = httppost.getEntity().getContent() ; 
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            StringBuilder out = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                out.append(line);
+            }
+            System.out.println(out.toString());   //Prints the string content read from input stream
+            reader.close(); */
+            responseStream = response.getEntity().getContent();
         } else if(type.equals("PUT")) {
             HttpPut httpput = new HttpPut(url);
             httpput.setEntity(new UrlEncodedFormEntity(URL.getData()));

@@ -1,6 +1,7 @@
 package com.example.tagoverflow;
 
 import org.apache.http.NameValuePair;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -8,6 +9,7 @@ public class URLContext {
     private String url;
     private String type;
     private List<NameValuePair> data;
+    private JSONObject json ; 
 
     Callback callback;
 
@@ -39,6 +41,16 @@ public class URLContext {
     public void setData(List<NameValuePair> data) {
         this.data = data;
     }
+    
+   public void setJSON(JSONObject json)
+   {
+	   this.json = json ; 
+   }
+   
+   public JSONObject getJSON()
+   {
+	   return json ; 
+   }
 
     public Callback getCallback() {
         return callback;
