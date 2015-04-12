@@ -7,11 +7,13 @@ import org.json.JSONObject ;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.util.Log;
+import android.view.*;
+import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,9 +22,11 @@ public class QuestionsListAdapter extends BaseAdapter {
 
 	JSONArray questions ;
 	LayoutInflater inflater ; 
+	Activity parentActivity ; 
 	
 	public QuestionsListAdapter(Activity myActivity, String jsonOutput, Resources resources) throws JSONException {
 		questions = new JSONArray(jsonOutput);
+		parentActivity = myActivity ; 
         inflater = (LayoutInflater) myActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 	
@@ -45,7 +49,7 @@ public class QuestionsListAdapter extends BaseAdapter {
 	public long getItemId(int position) {
 		try {
 			JSONObject obj = (JSONObject) questions.get(position) ;
-            return Integer.parseInt(obj.getString("question_id"));
+            return Integer.parseInt(obj.getString("ID"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -68,7 +72,7 @@ public class QuestionsListAdapter extends BaseAdapter {
 	            holder = (QuestionHolder) view.getTag();
 	        }
 	        try {
-	        	JSONObject obj = (JSONObject)questions.get(position) ;
+	        	final JSONObject obj = (JSONObject)questions.get(position) ;
 	        	holder.tags.setText("");
 	        	for(int i = 0 ; i < obj.getJSONArray("tags").length() ; i++)
 	        	{
@@ -85,12 +89,30 @@ public class QuestionsListAdapter extends BaseAdapter {
 							holder.dp.setImageBitmap(img);
 						}
 					}
-		        }, "https://www.gravatar.com/avatar/303e66fe201050e384ab3fad08c1ed6d?s=128&d=identicon&r=PG&f=1");
+		        }, obj.getString("avatar"));
+	        	view.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						Log.d("CLICK!", "works?") ;
+						Intent intent = new Intent(parentActivity, SinglePost.class);
+						try {
+							intent.putExtra("id", obj.getString("ID")) ;
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} 
+	                    parentActivity.startActivity(intent);
+					}
+		        	
+		        });
 	        	
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-		return view;
+	        
+		   return view;
 	}
 
 }

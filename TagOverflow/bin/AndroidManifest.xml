@@ -23,6 +23,11 @@
             android:name=".NewPost"
             android:label="New Question"
             android:parentActivityName=".Home" >
+            </activity>
+            <activity
+            android:name=".SinglePost"
+            android:label="Discussion"
+            android:parentActivityName=".Home" >
         <!-- Parent activity meta-data to support 4.0 and lower -->
         <meta-data
             android:name="android.support.Home"

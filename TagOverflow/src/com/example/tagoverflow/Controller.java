@@ -16,6 +16,13 @@ public class Controller {
 		new AsyncHTTP(callback).execute(userContext) ;
 	}
 	
+	public static void getDiscussionDetails(Callback callback, String discussionID)
+	{
+		String endpoint = "discussions/" + discussionID ;
+		URLContext questionsContext = new URLContext(url+endpoint, "GET", callback);
+        new AsyncHTTP(callback).execute(questionsContext);
+	}
+	
 	public static void getUserDP(Callback callback, String dpURL) {
 		new LoadImage(callback).execute(dpURL) ;
 	}

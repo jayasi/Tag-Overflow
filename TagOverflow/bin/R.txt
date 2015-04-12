@@ -335,6 +335,7 @@ int drawable abc_textfield_search_default_mtrl_alpha 0x7f020031
 int drawable abc_textfield_search_material 0x7f020032
 int drawable add_icon 0x7f020033
 int drawable ic_launcher 0x7f020034
+int id InnerRelativeLayout 0x7f09004e
 int id action_bar 0x7f090031
 int id action_bar_activity_content 0x7f090003
 int id action_bar_container 0x7f090030
@@ -348,12 +349,13 @@ int id action_menu_presenter 0x7f090006
 int id action_mode_bar 0x7f09002e
 int id action_mode_bar_stub 0x7f09002d
 int id action_mode_close_button 0x7f090020
-int id action_settings 0x7f09004a
+int id action_settings 0x7f090052
 int id activity_chooser_view_content 0x7f090021
-int id add_new 0x7f090049
+int id add_new 0x7f090051
 int id always 0x7f090014
 int id beginning 0x7f09001b
 int id body 0x7f090044
+int id btnReply 0x7f09004f
 int id button1 0x7f09003f
 int id button2 0x7f090045
 int id checkbox 0x7f090029
@@ -362,6 +364,7 @@ int id decor_content_parent 0x7f09002f
 int id default_activity_button 0x7f090024
 int id dialog 0x7f090019
 int id disableHome 0x7f09000d
+int id discussiontitle 0x7f09004c
 int id dp 0x7f090046
 int id dropdown 0x7f09001a
 int id edit_query 0x7f090033
@@ -384,6 +387,9 @@ int id progress_circular 0x7f090007
 int id progress_horizontal 0x7f090008
 int id question 0x7f090047
 int id radio 0x7f09002b
+int id replieslist 0x7f09004d
+int id reply 0x7f090049
+int id replyField 0x7f090050
 int id search_badge 0x7f090035
 int id search_bar 0x7f090034
 int id search_button 0x7f090036
@@ -404,8 +410,10 @@ int id tabMode 0x7f09000c
 int id tags 0x7f090048
 int id textView1 0x7f090040
 int id title 0x7f090027
+int id titleView 0x7f09004a
 int id up 0x7f090001
 int id useLogo 0x7f090013
+int id userdp 0x7f09004b
 int id username 0x7f090041
 int id webv 0x7f090043
 int id withText 0x7f090018
@@ -439,7 +447,9 @@ int layout activity_home 0x7f030018
 int layout auth_dialog 0x7f030019
 int layout new_post 0x7f03001a
 int layout questions 0x7f03001b
-int layout support_simple_spinner_dropdown_item 0x7f03001c
+int layout replies 0x7f03001c
+int layout single_discussion 0x7f03001d
+int layout support_simple_spinner_dropdown_item 0x7f03001e
 int menu home 0x7f0c0000
 int string abc_action_bar_home_description 0x7f0a0001
 int string abc_action_bar_home_description_format 0x7f0a0005
