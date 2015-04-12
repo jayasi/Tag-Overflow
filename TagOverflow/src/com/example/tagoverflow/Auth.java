@@ -28,18 +28,21 @@ public class Auth extends Activity {
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auth);
+        //setContentView(R.layout.activity_auth);
+        setContentView(R.layout.auth_dialog) ;
         pref = getSharedPreferences("AppPref", MODE_PRIVATE); 
+        authenticate(new View(this.getApplicationContext()));
     }
 	
 	public void authenticate(View view) {
 		//Do the oauth part here, get the user id.
 		//Send the userid to the Home Activity
 		
-		auth_dialog = new Dialog(Auth.this);
-        auth_dialog.setContentView(R.layout.auth_dialog);
-        web = (WebView)auth_dialog.findViewById(R.id.webv);
-        web.getSettings().setJavaScriptEnabled(true);
+		//auth_dialog = new Dialog(Auth.this);
+        //auth_dialog.setContentView(R.layout.auth_dialog);
+        //web = (WebView)auth_dialog.findViewById(R.id.webv);
+        web = (WebView)findViewById(R.id.webv) ;
+		web.getSettings().setJavaScriptEnabled(true);
         web.loadUrl(OAUTH_URL+"?redirect_uri="+REDIRECT_URI+"&client_id="+CLIENT_ID+"&scope="+OAUTH_SCOPE+"&key=HtY8bMld7du)7cX*VkZ5yg((");
         web.setWebViewClient(new WebViewClient() {
         	boolean authComplete = false;
@@ -63,7 +66,7 @@ public class Auth extends Activity {
                     SharedPreferences.Editor edit = pref.edit();
                     edit.putString("AccessToken", authCode); //Storing the accessToken in the shared preferences for easy access
                     edit.commit();
-                    auth_dialog.dismiss();
+                    //auth_dialog.dismiss();
                     Toast.makeText(getApplicationContext(),"Authorization Code is: " +authCode, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Auth.this, Home.class);
                     startActivity(intent);
@@ -73,12 +76,12 @@ public class Auth extends Activity {
                     authComplete = true;
                     setResult(Activity.RESULT_CANCELED, resultIntent);
                     Toast.makeText(getApplicationContext(), "Error Occured", Toast.LENGTH_SHORT).show();
-                    auth_dialog.dismiss();
+                    //auth_dialog.dismiss();
                 }
             }
         });
-        auth_dialog.show();
-        auth_dialog.setTitle("Authorize TagOverflow");
-        auth_dialog.setCancelable(true);
+        //auth_dialog.show();
+        //auth_dialog.setTitle("Authorize TagOverflow");
+        //auth_dialog.setCancelable(true);
 	 }
 }
