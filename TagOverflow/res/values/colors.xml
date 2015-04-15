@@ -1,4 +1,4 @@
 <resources>
-    <color name="tagBorderDefault">#000000</color>
-    <color name="tagBackgroundDefault">#ffffff</color>
+    <color name="tagBorderDefault">#5F9F9F</color>
+    <color name="tagBackgroundDefault">#E0EEEE</color>
 </resources>

@@ -86,7 +86,7 @@ public class TagView extends EditText implements OnClickListener, AnimationListe
         final int width = getWidth()-push;
         final int height = getHeight();
         final int roundness = height/2;
-
+        
         canvas.drawRoundRect(new RectF(push, 0, width, height), roundness, roundness, mBackgroundPaint);
         canvas.drawRoundRect(new RectF(push, 0, width, height), roundness, roundness, mBorderPaint);
         super.onDraw(canvas);

@@ -51,7 +51,6 @@ public class Home extends ActionBarActivity {
 
 			@Override
 			public void onRequestComplete(Object output, int x) {
-				// TODO Auto-generated method stu
 				updateQuestions((String)output);
 			}
         	  

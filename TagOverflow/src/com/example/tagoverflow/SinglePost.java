@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
@@ -31,11 +32,13 @@ public class SinglePost  extends ActionBarActivity{
 	ImageView userDP ;
 	SharedPreferences pref ; 
 	ProgressBar progress ; 
+	TagListView tagListView ; 
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_discussion);
+        tagListView = (TagListView) findViewById(R.id.discussiontagview);
         discussionTitle = (TextView)findViewById(R.id.discussiontitle);
         discussionBody = new TextView(this.getApplicationContext()) ;
         pref = getSharedPreferences("AppPref", MODE_PRIVATE); 
@@ -66,6 +69,7 @@ public class SinglePost  extends ActionBarActivity{
 		
 		for(int i = 0 ; i < tags.length() ; i++)
 		{
+			tagListView.addTag(tags.getString(i));
 			TextView text = new TextView(this.getApplicationContext()) ;
 			//Used a hack right now to show the tags separately. Will figure out a way to make these separate later.
 			text.setText("   " + tags.getString(i)) ; 
@@ -78,27 +82,32 @@ public class SinglePost  extends ActionBarActivity{
 				}
 				
 			});
-			linear.addView(text);
+			
+			//linear.addView(text);
 			
 		}
 		
 		
-		RelativeLayout relative = (RelativeLayout)findViewById(R.id.titleView) ;
+		/*RelativeLayout relative = (RelativeLayout)findViewById(R.id.titleView) ;
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
 		params.addRule(RelativeLayout.BELOW, R.id.discussiontitle);
 		params.addRule(RelativeLayout.RIGHT_OF, R.id.userdp);
 		params.leftMargin = 110 ; 
-		relative.addView(linear, params);
-		discussionBody.setText(Html.fromHtml(obj.getString("body")));
+		relative.addView(linear, params); */
+		String body = "<body>" + obj.getString("body")  + "</body>";
+		body = body.replace("<code>", "<font color=grey><tt>") ; 
+		body = body.replace("</code>", "</font></tt>") ;
+		discussionBody.setText(Html.fromHtml(body));
+		discussionBody.setTypeface(Typeface.SANS_SERIF);
 		discussionBody.setTextColor(Color.BLACK);
 		JSONArray arr  ;
 		
-		if(null!=obj.getJSONArray("replies"))
+		try
 		{
 			arr = obj.getJSONArray("replies") ;
 		}
-		else
+		catch (Exception e )
 		{
 			arr = new JSONArray() ;
 		}

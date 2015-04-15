@@ -13,7 +13,9 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class NewPost extends ActionBarActivity {
 
@@ -57,7 +59,21 @@ public class NewPost extends ActionBarActivity {
 				@Override
 				public void onRequestComplete(Object output, int x) {
 					// TODO Auto-generated method stub
-					Log.d("posted", (String) output) ;
+					try{
+						
+						JSONObject json = new JSONObject((String)output) ; 
+						if(json.getString("error") != null)
+							Toast.makeText(getApplicationContext(), json.getString("error"), Toast.LENGTH_SHORT).show() ;
+						else 
+							Log.d("here", "Start new activity and go to my discussions") ;  // Start a new activity here. 
+					}
+					catch(Exception e)
+					{
+						Log.d("e", e.getLocalizedMessage()) ;
+						
+					}
+					Log.d("posted here", (String) output) ;
+					
 				}
 				
 			});
@@ -69,6 +85,17 @@ public class NewPost extends ActionBarActivity {
 		
 	}
 	
+	public void moreTags(View view)
+	{
+		String tags = ((EditText)findViewById(R.id.moretags)).getText().toString() ;
+		String[] listTags = tags.split(",") ;
+		for(int i = 0 ; i < listTags.length ; i++) 
+		{
+			tagListView.addTag(listTags[i]);
+		}
+		EditText t = (EditText)findViewById(R.id.moretags) ; 
+		t.setText("");
+	}
 	
 	public void predict(View view) throws JSONException
 	{
@@ -95,7 +122,10 @@ public class NewPost extends ActionBarActivity {
         		{
         			Log.d("exception", e.getMessage()) ;
         		}
-        		
+        		EditText t = (EditText)findViewById(R.id.moretags) ; 
+        		t.setVisibility(View.VISIBLE);
+        		Button b = (Button)findViewById(R.id.button1) ; 
+        		b.setVisibility(View.VISIBLE);
         		//Log.d("psasasd", o) ; 
         		/*String xx = "[";
         		String clean = o.split(xx)[0].split("]")[0];
@@ -106,5 +136,6 @@ public class NewPost extends ActionBarActivity {
         		
         	}
         });
+		
 	}
 }

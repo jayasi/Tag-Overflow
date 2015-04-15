@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:fontFamily="sans-serif-light">
 
       
     <ProgressBar
@@ -16,7 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/titleView">
+        android:id="@+id/titleView"
+        android:background="#e9e9e9">
         
         <ImageView
               android:id="@+id/userdp"
@@ -38,7 +40,21 @@
               android:layout_centerHorizontal="true"
               android:layout_alignParentTop="true"
               android:textSize="20sp"
+              android:textColor="#00688B"
               android:fontFamily="sans-serif-light" />
+	    
+	    <com.example.tagoverflow.TagListView
+        xmlns:taglist="com.example.taglist"
+		android:id="@+id/discussiontagview"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:padding="0dp"
+		android:layout_alignLeft="@+id/discussiontitle"
+		android:layout_marginTop="7dp"
+		android:layout_marginBottom="7dp"
+		android:layout_below="@+id/discussiontitle"
+		taglist:horizontal_spacing="3dp"
+		taglist:vertical_spacing="5dp" />
 	    
 	 </RelativeLayout>
     
@@ -108,7 +124,9 @@
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="submitReply"/>
+                android:onClick="submitReply"
+                android:background="#00688B"
+                android:textColor="#ffffff"/>
 
             <EditText
                 android:id="@+id/replyField"
