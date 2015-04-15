@@ -59,6 +59,8 @@ public class JSON {
             System.out.println(out.toString());   //Prints the string content read from input stream
             reader.close(); */
             responseStream = response.getEntity().getContent();
+            System.out.println("Wuhoooo") ; 
+            System.out.println(responseStream) ;
         } else if(type.equals("PUT")) {
             HttpPut httpput = new HttpPut(url);
             httpput.setEntity(new UrlEncodedFormEntity(URL.getData()));

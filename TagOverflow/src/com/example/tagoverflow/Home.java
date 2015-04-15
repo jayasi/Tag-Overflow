@@ -1,5 +1,10 @@
 package com.example.tagoverflow;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -40,26 +45,28 @@ public class Home extends ActionBarActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
           String query = intent.getStringExtra(SearchManager.QUERY);
           Log.d("Search for", query) ;
+          ArrayList<NameValuePair> data = new ArrayList<NameValuePair>() ;
+          data.add(new BasicNameValuePair("title", query)) ; 
+          Controller.search(data, new Callback() {
+
+			@Override
+			public void onRequestComplete(Object output, int x) {
+				// TODO Auto-generated method stu
+				updateQuestions((String)output);
+			}
+        	  
+          });
+        }
+        else
+        {
+        	Controller.getQuestions(new Callback() {
+                @Override
+                public void onRequestComplete(Object output, int x) {
+                	updateQuestions((String)output);
+                }
+            });   
         }
         
-        Controller.getUserInfo(new Callback() {
-        	@Override
-        	public void onRequestComplete(Object output, int x) { 
-        		try {
-        			JSONObject obj = new JSONObject((String)output) ;
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-        		Log.d("user data", (String)output) ;
-        	}
-        }, pref.getString("AccessToken", "doesNotExist") ); 
-        Controller.getQuestions(new Callback() {
-            @Override
-            public void onRequestComplete(Object output, int x) {
-            	updateQuestions((String)output);
-            }
-        });   
         this.setTitle("Home");
     }
 
