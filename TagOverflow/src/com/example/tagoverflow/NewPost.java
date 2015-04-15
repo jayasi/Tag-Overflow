@@ -18,6 +18,7 @@ import android.widget.EditText;
 public class NewPost extends ActionBarActivity {
 
 	SharedPreferences pref ; 
+	TagListView tagListView ;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class NewPost extends ActionBarActivity {
         setContentView(R.layout.new_post);
         pref = getSharedPreferences("AppPref", MODE_PRIVATE); 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        tagListView = (TagListView) findViewById(R.id.tagview);
     }
 	
 	
@@ -41,8 +43,11 @@ public class NewPost extends ActionBarActivity {
 			data.put("title", titleString) ;
 			data.put("body", bodyString) ; 
 			JSONArray arr = new JSONArray() ; 
-			arr.put("c#") ; //Putting hardcoded tags for now. 
-			arr.put("java") ;
+			for(int i = 0 ; i < tagListView.getSize() ; i++)
+			{
+				arr.put(tagListView.getTag(i)) ;
+				Log.d("tags", tagListView.getTag(i) ) ;
+			}
 			data.put("tags", arr) ;
 			params.put("data", data) ;
 			params.put("access_token", pref.getString("AccessToken", "doesNotExist")) ; 
@@ -80,7 +85,25 @@ public class NewPost extends ActionBarActivity {
         	@Override
         	public void onRequestComplete(Object output, int x) { 
         		Log.d("predicted!", (String)output) ;
-        		//JSONArray json = (JSONArray)output ; 
+        		JSONArray o ;
+        		try{
+        			o = new JSONArray((String)output) ;
+        			for (int i = 0 ; i < o.length(); i++)
+            			tagListView.addTag(o.getString(i));
+        		}
+        		catch(Exception e)
+        		{
+        			Log.d("exception", e.getMessage()) ;
+        		}
+        		
+        		//Log.d("psasasd", o) ; 
+        		/*String xx = "[";
+        		String clean = o.split(xx)[0].split("]")[0];
+        		Log.d("cleaned!", clean) ; 
+        		String list[] = clean.split(",") ;
+        		for (int i = 0 ; i < list.length ; i++)
+        			tagListView.addTag(list[i]); */
+        		
         	}
         });
 	}

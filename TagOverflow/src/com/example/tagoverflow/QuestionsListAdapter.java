@@ -1,6 +1,7 @@
 package com.example.tagoverflow;
 
 import org.json.JSONArray;
+import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject ;
 
@@ -81,8 +82,9 @@ public class QuestionsListAdapter extends BaseAdapter {
 	        	}
 	        	holder.question.setText(Html.fromHtml(obj.getString("title")));
 	        	// !!! Something is wrong here. All images load for the first discussion avatar. 
-	        	// To be fixed later. 
-	        	Controller.getUserDP(new Callback() {
+	        	// To be fixed later. '
+	        	Picasso.with(parentActivity).load(obj.getString("avatar")).into(holder.dp);
+	        	/*Controller.getUserDP(new Callback() {
 					@Override
 					public void onRequestComplete(Object output, int i) {
 						if(i==0)
@@ -91,7 +93,7 @@ public class QuestionsListAdapter extends BaseAdapter {
 							holder.dp.setImageBitmap(img);
 						}
 					}
-		        }, obj.getString("avatar"));
+		        }, obj.getString("avatar")); */
 	        	view.setOnClickListener(new OnClickListener() {
 
 					@Override

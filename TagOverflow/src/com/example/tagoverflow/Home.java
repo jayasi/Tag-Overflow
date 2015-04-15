@@ -3,7 +3,11 @@ package com.example.tagoverflow;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,19 +32,21 @@ public class Home extends ActionBarActivity {
         setContentView(R.layout.activity_home);
         pref = getSharedPreferences("AppPref", MODE_PRIVATE); 
         
+        //SharedPreferences.Editor edit = pref.edit();
+        //edit.putString("AccessToken", "3fzYofjVJLIM*ETdKljPXw))"); //Storing the accessToken in the shared preferences for easy access
+        //edit.commit();
         
-        SharedPreferences.Editor edit = pref.edit();
-        edit.putString("AccessToken", "3fzYofjVJLIM*ETdKljPXw))"); //Storing the accessToken in the shared preferences for easy access
-        edit.commit();
+        Intent intent = getIntent();
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+          String query = intent.getStringExtra(SearchManager.QUERY);
+          Log.d("Search for", query) ;
+        }
         
-        //displayName = (TextView)findViewById(R.id.username) ;
         Controller.getUserInfo(new Callback() {
         	@Override
         	public void onRequestComplete(Object output, int x) { 
         		try {
         			JSONObject obj = new JSONObject((String)output) ;
-        			//displayName.setText("Hi, " + obj.getJSONArray("items").getJSONObject(0).getString("display_name") );
-					//Log.d("displayname", obj.getJSONArray("items").getJSONObject(0).getString("display_name"));
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -75,19 +81,19 @@ public class Home extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
     	MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.home, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (android.support.v7.widget.SearchView) MenuItemCompat.getActionView(searchItem);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setIconifiedByDefault(false);
         return super.onCreateOptionsMenu(menu);
-        
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        else if (id == R.id.add_new) {
+        if (id == R.id.add_new) {
         	Intent intent = new Intent(Home.this, NewPost.class);
-            intent.putExtra("id", "2313"); // Sending random (user)id for now
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
