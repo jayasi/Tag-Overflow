@@ -9,8 +9,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
+import android.app.ActionBar.Tab;
+import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -31,7 +34,8 @@ public class Home extends ActionBarActivity {
 	SharedPreferences pref ;
 	ProgressBar bar ;
 	
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
@@ -40,8 +44,64 @@ public class Home extends ActionBarActivity {
         //SharedPreferences.Editor edit = pref.edit();
         //edit.putString("AccessToken", "3fzYofjVJLIM*ETdKljPXw))"); //Storing the accessToken in the shared preferences for easy access
         //edit.commit();
+        this.setTitle("Home");
         
-        Intent intent = getIntent();
+        final ActionBar actionBar = getSupportActionBar() ;
+        if(actionBar == null )
+        	Log.d("NULLL", "aDASDAS") ; 
+
+        // Specify that tabs should be displayed in the action bar.
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        // Create a tab listener that is called when the user changes tabs.
+        ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+           /* public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+                // show the given tab
+            }
+
+            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+                // hide the given tab
+            }
+
+            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+                // probably ignore this event
+            } */
+
+			@Override
+			public void onTabReselected(
+					android.support.v7.app.ActionBar.Tab arg0,
+					android.support.v4.app.FragmentTransaction arg1) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTabSelected(
+					android.support.v7.app.ActionBar.Tab arg0,
+					android.support.v4.app.FragmentTransaction arg1) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTabUnselected(
+					android.support.v7.app.ActionBar.Tab arg0,
+					android.support.v4.app.FragmentTransaction arg1) {
+				// TODO Auto-generated method stub
+				
+			}
+        };
+
+        // Add 3 tabs, specifying the tab's text and TabListener
+        for (int i = 0; i < 2; i++) {
+            actionBar.addTab(
+                    actionBar.newTab()
+                            .setText("Tab " + (i + 1))
+                            .setTabListener(tabListener));
+        }
+        
+        
+        /*Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
           String query = intent.getStringExtra(SearchManager.QUERY);
           Log.d("Search for", query) ;
@@ -66,7 +126,7 @@ public class Home extends ActionBarActivity {
             });   
         }
         
-        this.setTitle("Home");
+        this.setTitle("Home"); */
     }
 
     public void updateQuestions(String output)
@@ -98,7 +158,7 @@ public class Home extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.add_new) {
+        if (id == R.id.ic_action_new) {
         	Intent intent = new Intent(Home.this, NewPost.class);
             startActivity(intent);
         }

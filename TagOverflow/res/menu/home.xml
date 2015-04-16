@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.tagoverflow.Home" >
 
-     <item android:id="@+id/add_new"
-          android:icon="@drawable/add_icon"
+     <item android:id="@+id/ic_action_new"
+          android:icon="@drawable/ic_action_new"
           android:title="Ask"
           android:orderInCategory="2"
           app:showAsAction="always" />
