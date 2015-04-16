@@ -129,12 +129,10 @@ public class Home extends ActionBarActivity {
           ArrayList<NameValuePair> data = new ArrayList<NameValuePair>() ;
           data.add(new BasicNameValuePair("title", query)) ; 
           Controller.search(data, new Callback() {
-
 			@Override
 			public void onRequestComplete(Object output, int x) {
 				updateQuestions((String)output);
 			}
-        	  
           });
         }  
         this.setTitle("Home");

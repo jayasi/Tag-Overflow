@@ -101,7 +101,8 @@
 	            android:layout_marginStart="7dp"
 	            android:layout_below="@+id/titleView"
 		        android:layout_marginLeft="7dp"
-		        android:fontFamily="sans-serif-light" >
+		        android:fontFamily="sans-serif-light"
+		        android:layout_marginBottom="50dp" >
 	        </ListView>
 	        
            
