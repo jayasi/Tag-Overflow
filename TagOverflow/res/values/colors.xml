@@ -2,4 +2,5 @@
     <color name="tagBorderDefault">#5F9F9F</color>
     <color name="tagBackgroundDefault">#E0EEEE</color>
     <color name="themeColor">#00688B</color>
+    <color name="tabColor">#507786</color>
 </resources>

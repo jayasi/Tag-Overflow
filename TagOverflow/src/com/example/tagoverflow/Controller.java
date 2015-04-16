@@ -10,6 +10,13 @@ public class Controller {
 	static String url = "http://192.168.53.188:8080/" ; //Server
 	static String key = "HtY8bMld7du)7cX*VkZ5yg((" ;
 	
+	public static void getMyDiscussions(List<NameValuePair> data, Callback callback) {
+		String endpoint = "/users/mydiscussions" ; 
+		URLContext context = new URLContext(url+endpoint, "POST", callback) ; 
+		context.setData(data);
+		new AsyncHTTP(callback).execute(context) ;
+	}
+	
 	public static void search(List<NameValuePair> data, Callback callback) {
 		String endpoint = "discussions/search/" ;
 		URLContext context = new URLContext(url+endpoint, "POST", callback);

@@ -55,17 +55,6 @@ public class Home extends ActionBarActivity {
 
         // Create a tab listener that is called when the user changes tabs.
         ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-           /* public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-                // show the given tab
-            }
-
-            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-                // hide the given tab
-            }
-
-            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-                // probably ignore this event
-            } */
 
 			@Override
 			public void onTabReselected(
@@ -80,6 +69,29 @@ public class Home extends ActionBarActivity {
 					android.support.v7.app.ActionBar.Tab arg0,
 					android.support.v4.app.FragmentTransaction arg1) {
 				// TODO Auto-generated method stub
+				if ( arg0.getPosition() == 0 )
+				{
+					Controller.getQuestions(new Callback() {
+		                @Override
+		                public void onRequestComplete(Object output, int x) {
+		                	updateQuestions((String)output);
+		                }
+		            });   
+				}
+				else
+				{
+					 ArrayList<NameValuePair> data = new ArrayList<NameValuePair>() ;
+			          data.add(new BasicNameValuePair("access_token", pref.getString("AccessToken", "empty"))) ; 
+					  Controller.getMyDiscussions(data, new Callback() {
+
+						@Override
+						public void onRequestComplete(Object output, int x) {		
+							updateQuestions((String)output);
+						}
+			        	  
+			          });
+					
+				}
 				
 			}
 
@@ -94,14 +106,23 @@ public class Home extends ActionBarActivity {
 
         // Add 3 tabs, specifying the tab's text and TabListener
         for (int i = 0; i < 2; i++) {
-            actionBar.addTab(
+        	switch(i) 
+        	{
+        	case 1:  actionBar.addTab(
                     actionBar.newTab()
-                            .setText("Tab " + (i + 1))
-                            .setTabListener(tabListener));
+                    .setText("Feed")
+                    .setIcon(R.drawable.ic_action_chat)
+                    .setTabListener(tabListener));
+        	case 2:  actionBar.addTab(
+                    actionBar.newTab()
+                    .setText("My Discussions")
+                    .setIcon(R.drawable.ic_action_user)
+                    .setTabListener(tabListener));
+        	}
         }
         
         
-        /*Intent intent = getIntent();
+       Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
           String query = intent.getStringExtra(SearchManager.QUERY);
           Log.d("Search for", query) ;
@@ -115,18 +136,8 @@ public class Home extends ActionBarActivity {
 			}
         	  
           });
-        }
-        else
-        {
-        	Controller.getQuestions(new Callback() {
-                @Override
-                public void onRequestComplete(Object output, int x) {
-                	updateQuestions((String)output);
-                }
-            });   
-        }
-        
-        this.setTitle("Home"); */
+        }  
+        this.setTitle("Home");
     }
 
     public void updateQuestions(String output)
