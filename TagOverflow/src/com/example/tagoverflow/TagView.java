@@ -94,7 +94,6 @@ public class TagView extends EditText implements OnClickListener, AnimationListe
 
 	@Override
 	public void onClick(View v) {
-
 		if (!mSelectedForDelete) {
 			mSelectedForDelete = true;
 
@@ -135,4 +134,6 @@ public class TagView extends EditText implements OnClickListener, AnimationListe
 
 	@Override
 	public void onAnimationStart(Animation animation) {}
+
+
 }

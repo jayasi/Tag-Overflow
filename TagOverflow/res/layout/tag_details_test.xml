@@ -1,0 +1,68 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:fontFamily="sans-serif-light">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/titleView"
+        android:background="#e9e9e9">
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/titleView">
+
+        <TextView
+            android:id="@+id/tagtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="5dp"
+            android:textSize="20sp"
+            android:textColor="#00688B"
+            android:fontFamily="sans-serif-light" />
+
+        <TextView
+            android:id="@+id/tagdetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="5dp"
+            android:textSize="20sp"
+            android:textColor="#00688B"
+            android:fontFamily="sans-serif-light" />
+
+        <TextView
+            android:id="@+id/tagfrequency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="5dp"
+            android:textSize="20sp"
+            android:textColor="#00688B"
+            android:fontFamily="sans-serif-light" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listViewSynonyms"
+            android:layout_gravity="center_horizontal" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listViewRelatedTags"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
+
+</RelativeLayout>

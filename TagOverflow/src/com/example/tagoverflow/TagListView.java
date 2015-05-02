@@ -13,11 +13,9 @@ import android.view.ViewGroup.OnHierarchyChangeListener;
 /**
  * Based on PredicateLayout by Henrik Gustafsson
  * 
- * @see http
- *      ://stackoverflow.com/questions/549451/line-breaking-widget-layout-for
- *      -android
+ * @see http://stackoverflow.com/questions/549451/line-breaking-widget-layout-for-android
  * @license http://creativecommons.org/licenses/by-sa/2.5/
- */
+        */
 public class TagListView extends ViewGroup implements OnHierarchyChangeListener {
 
 	private int mLineHeight;
@@ -90,6 +88,10 @@ public class TagListView extends ViewGroup implements OnHierarchyChangeListener 
 		}
 			
 	}
+
+    public void addTag(TagView tag) {
+        addView(tag);
+    }
 	
 	public String getTag(int x) {
 		return mTags.get(x) ;

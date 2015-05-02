@@ -1,0 +1,96 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:fontFamily="sans-serif-light">
+
+      
+    <ProgressBar
+		        style="@android:style/Widget.ProgressBar.Small"
+		        android:id="@+id/progressbar"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerHorizontal="true"
+		        android:layout_centerVertical="true" />
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/titleView"
+        android:background="#e9e9e9">
+        
+        <ImageView
+              android:id="@+id/userdp"
+              android:layout_width="50dp"
+              android:layout_height="50dp"
+              android:layout_marginTop="7dp"
+              android:layout_marginStart="5dp"
+              android:layout_marginLeft="5dp" />
+        
+	    <TextView
+	        android:id="@+id/discussiontitle"
+	        android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_toRightOf="@+id/userdp"
+              android:layout_toEndOf="@+id/userdp"
+              android:layout_marginTop="7dp"
+              android:layout_marginStart="5dp"
+              android:layout_marginLeft="5dp"
+              android:layout_centerHorizontal="true"
+              android:layout_alignParentTop="true"
+              android:textSize="20sp"
+              android:textColor="#00688B"
+              android:fontFamily="sans-serif-light" />
+	    
+	    <com.example.tagoverflow.TagListView
+        xmlns:taglist="com.example.taglist"
+		android:id="@+id/discussiontagview"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:padding="0dp"
+		android:layout_alignLeft="@+id/discussiontitle"
+		android:layout_marginTop="7dp"
+		android:layout_marginBottom="7dp"
+		android:layout_below="@+id/discussiontitle"
+		taglist:horizontal_spacing="3dp"
+		taglist:vertical_spacing="5dp" />
+	    
+	 </RelativeLayout>
+    
+
+			<ListView
+	            android:id="@+id/replieslist"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginStart="7dp"
+	            android:layout_below="@+id/titleView"
+		        android:layout_marginLeft="7dp"
+		        android:fontFamily="sans-serif-light"
+		        android:layout_marginBottom="50dp" >
+	        </ListView>
+	        
+           
+        <LinearLayout
+		    android:focusable="true" android:focusableInTouchMode="true"
+		    android:layout_width="0px" android:layout_height="0px"/>
+
+         <RelativeLayout
+            android:id="@+id/InnerRelativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#ffffff">
+
+
+
+
+
+
+        </RelativeLayout>
+         
+         
+
+        
+
+    </RelativeLayout>

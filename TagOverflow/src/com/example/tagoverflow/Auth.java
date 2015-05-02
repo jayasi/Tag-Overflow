@@ -84,6 +84,7 @@ public class Auth extends Activity {
                     edit.commit();
                     auth_dialog.dismiss();
                     Toast.makeText(getApplicationContext(),"Authorization Code is: " +authCode, Toast.LENGTH_SHORT).show();
+                    Log.d("authCode", authCode);
                     Intent intent = new Intent(Auth.this, Home.class);
                     startActivity(intent);
                 }else if(url.contains("error=access_denied")){
